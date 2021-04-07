@@ -8,6 +8,7 @@ from plexapi.myplex import MyPlexAccount
 updater = Updater(token='{{TELEGRAM_TOKEN}}', use_context=True)
 
 plexaccount = MyPlexAccount('{{PLEX_USERNAME}}', '{{PLEX_PASSWORD}}')
+### Should change the plex server url string to an env var to better integrate with a docker image
 plexserver = plexaccount.resource('{{PLEX_SERVER}}').connect()
 
 #idk
