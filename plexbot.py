@@ -1,15 +1,22 @@
 #imports
 import requests
 import re
+import os
 from functools import wraps
 from telegram.ext import Updater
 from telegram.ext import CommandHandler
 from plexapi.myplex import MyPlexAccount
-updater = Updater(token='{{TELEGRAM_TOKEN}}', use_context=True)
 
-plexaccount = MyPlexAccount('{{PLEX_USERNAME}}', '{{PLEX_PASSWORD}}')
+TELEGRAM_TOKEN = os.environ("TELEGRAM_TOKEN")
+PLEX_USERNAME = os.environ("PLEX_USERNAME")
+PLEX_PASSWORD = os.environ("PLEX_PASSWORD")
+PLEX_SERVERNAME = os.environ("PLEX_SERVERNAME")
+
+updater = Updater(token=TELEGRAM_TOKEN, use_context=True)
+
+plexaccount = MyPlexAccount(PLEX_USERNAME, PLEX_PASSWORD)
 ### Should change the plex server url string to an env var to better integrate with a docker image
-plexserver = plexaccount.resource('{{PLEX_SERVER}}').connect()
+plexserver = plexaccount.resource(PLEX_SERVERNAME).connect()
 
 #idk
 dispatcher = updater.dispatcher
